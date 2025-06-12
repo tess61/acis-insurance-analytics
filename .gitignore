@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+*.egg-info/
+dist/
+build/
+
+# Data
+data/raw/*
+data/processed/*
+data/external/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+
+# DVC
+dvc/
+
+# Notebooks
+notebooks/*.ipynb_checkpoints/
+
+# Reports
+reports/figures/*
+!reports/figures/.gitkeep
+
+# Misc
+*.log
+.DS_Store

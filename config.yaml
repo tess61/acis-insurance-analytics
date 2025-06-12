@@ -1,0 +1,8 @@
+data:
+  raw_path: data/raw/MachineLearningRating_v3.txt
+  processed_path: data/processed/cleaned_data.csv
+eda:
+  output_dir: reports/figures
+modeling:
+  train_test_split: 0.8
+  random_state: 42
