@@ -55,24 +55,37 @@ This repository contains the data analytics pipeline for AlphaCare Insurance Sol
 ```
 ## Setup
 1. Clone the repository:
-         `git clone https://github.com/tess61/acis-insurance-analytics.git`
-        
+```bash
+     `git clone https://github.com/tess61/acis-insurance-analytics.git`
+```
 2. Create a virtual environment:  
-        `python -m venv venv` 
+```bash
+    `python -m venv venv
+ ```
 3. Activate the environment: 
+```bash
         `source venv/bin/activate` 
+```
 4. Install dependencies: 
+```bash
         `pip install -r requirements.txt` 
+```
 5. Initialize DVC:
+```bash
         `dvc init`  
-
+```
 ## Usage
 - Run EDA: 
-    `python src/eda/main.py`
+```bash
+   `src/eda/main.py`
+```
 - Run statistical tests: 
+```bash
     `python src/stats/hypothesis_tests.py`
+```
 - Train models: 
+```bash
     `python src/modeling/main.py`
-
+```
 ## License
 Proprietary - AlphaCare Insurance Solutions
