@@ -31,7 +31,7 @@ def clean_data(df: pd.DataFrame, config_path: str) -> pd.DataFrame:
     )
     invalid_dates = df["TransactionMonth"].isna().sum()
     if invalid_dates > 0:
-        msg = f"Found {invalid_dates} invalid TransactionMonth values; dropping them"
+        msg = f"Invalid TransactionMonth: dropped {invalid_dates}"
         logger.warning(msg)
         df = df.dropna(subset=["TransactionMonth"])
 
@@ -40,7 +40,7 @@ def clean_data(df: pd.DataFrame, config_path: str) -> pd.DataFrame:
         df[col] = pd.to_numeric(df[col], errors="coerce")
         invalid_values = df[col].isna().sum()
         if invalid_values > 0:
-            logger.warning(f"Found {invalid_values} invalid {col} values; filling with 0")
+            logger.warning(f"Replaced {invalid_values} {col} vals with 0")
             df[col] = df[col].fillna(0)
 
     # Log summary statistics
