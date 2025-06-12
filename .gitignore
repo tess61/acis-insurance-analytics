@@ -19,7 +19,8 @@ data/external/*
 
 # DVC
 dvc/
-
+!*.dv
+!data/raw/*.dvc
 # Notebooks
 notebooks/*.ipynb_checkpoints/
 
