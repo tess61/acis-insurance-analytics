@@ -34,25 +34,30 @@ def create_insight_plots(df: pd.DataFrame, output_dir: str):
     plt.close()
 
     # Plot 3: Temporal Trend of Claims
-    df["TransactionMonth"] = pd.to_datetime(df["TransactionMonth"], errors="coerce")
+    df["TransactionMonth"] = pd.to_datetime(
+        df["TransactionMonth"], errors="coerce"
+    )
     monthly_claims = (
         df.groupby(df["TransactionMonth"].dt.to_period("M"))["TotalClaims"]
         .sum()
         .reset_index()
     )
-    # Convert Period to string for plotting
-    monthly_claims["TransactionMonth"] = monthly_claims["TransactionMonth"].astype(str)
-    # Debug: Inspect the DataFrame
+    monthly_claims["TransactionMonth"] = (
+        monthly_claims["TransactionMonth"].astype(str)
+    )
+    
     logger.info("Inspecting monthly_claims DataFrame:")
     logger.info(f"monthly_claims head:\n{monthly_claims.head()}")
     logger.info(f"monthly_claims dtypes:\n{monthly_claims.dtypes}")
-    # Ensure TotalClaims is numeric
+    
     monthly_claims["TotalClaims"] = pd.to_numeric(
         monthly_claims["TotalClaims"], errors="coerce"
     )
-    if monthly_claims["TotalClaims"].isna().sum() > 0:
+    
+    na_count = monthly_claims["TotalClaims"].isna().sum()
+    if na_count > 0:
         logger.warning(
-            f"Found {monthly_claims['TotalClaims'].isna().sum()} NaN values in TotalClaims; dropping them"
+            f"Found {na_count} NaN values in TotalClaims; dropping them"
         )
         monthly_claims = monthly_claims.dropna(subset=["TotalClaims"])
 

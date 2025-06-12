@@ -21,17 +21,18 @@ def clean_data(df: pd.DataFrame, config_path: str) -> pd.DataFrame:
             "PostalCode": "Unknown",
             "TotalPremium": 0,
             "TotalClaims": 0,
-            "TransactionMonth": pd.NaT,  # Handle missing dates
+            "TransactionMonth": pd.NaT,
         }
     )
 
-    # Convert TransactionMonth to datetime and log invalid values
-    df["TransactionMonth"] = pd.to_datetime(df["TransactionMonth"], errors="coerce")
+    # Convert TransactionMonth to datetime
+    df["TransactionMonth"] = pd.to_datetime(
+        df["TransactionMonth"], errors="coerce"
+    )
     invalid_dates = df["TransactionMonth"].isna().sum()
     if invalid_dates > 0:
-        logger.warning(
-            f"Found {invalid_dates} invalid TransactionMonth values; dropping them"
-        )
+        msg = f"Found {invalid_dates} invalid TransactionMonth values; dropping them"
+        logger.warning(msg)
         df = df.dropna(subset=["TransactionMonth"])
 
     # Ensure numerical columns are numeric
@@ -39,9 +40,7 @@ def clean_data(df: pd.DataFrame, config_path: str) -> pd.DataFrame:
         df[col] = pd.to_numeric(df[col], errors="coerce")
         invalid_values = df[col].isna().sum()
         if invalid_values > 0:
-            logger.warning(
-                f"Found {invalid_values} invalid {col} values; filling with 0"
-            )
+            logger.warning(f"Found {invalid_values} invalid {col} values; filling with 0")
             df[col] = df[col].fillna(0)
 
     # Log summary statistics
