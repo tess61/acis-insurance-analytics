@@ -45,22 +45,18 @@ def create_insight_plots(df: pd.DataFrame, output_dir: str):
     monthly_claims["TransactionMonth"] = (
         monthly_claims["TransactionMonth"].astype(str)
     )
-    
     logger.info("Inspecting monthly_claims DataFrame:")
     logger.info(f"monthly_claims head:\n{monthly_claims.head()}")
     logger.info(f"monthly_claims dtypes:\n{monthly_claims.dtypes}")
-    
     monthly_claims["TotalClaims"] = pd.to_numeric(
         monthly_claims["TotalClaims"], errors="coerce"
     )
-    
     na_count = monthly_claims["TotalClaims"].isna().sum()
     if na_count > 0:
         logger.warning(
             f"Found {na_count} NaN values in TotalClaims; dropping them"
         )
         monthly_claims = monthly_claims.dropna(subset=["TotalClaims"])
-
     plt.figure(figsize=(12, 6))
     sns.lineplot(x="TransactionMonth", y="TotalClaims", data=monthly_claims)
     plt.title("Monthly Total Claims Trend")
