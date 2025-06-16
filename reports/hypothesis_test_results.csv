@@ -1,0 +1,5 @@
+Hypothesis,Metric,p-value,Result
+No risk differences across provinces,Claim Frequency,5.925510718204678e-19,Reject
+No risk differences between zip codes,Claim Frequency,4.5932778849314244e-12,Reject
+No significant margin difference between zip codes,Margin,0.39636410456728266,Fail to Reject
+No significant risk difference between genders,Claim Frequency,0.9514644755420456,Fail to Reject
