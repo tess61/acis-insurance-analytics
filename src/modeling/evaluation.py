@@ -20,7 +20,6 @@ def evaluate_models(models, X_test, output_dir: str):
     for name, (model, metrics) in models.items():
         results.append({'Model': name, **metrics})
 
-
         # SHAP analysis for tree-based models
         if name in ['Random Forest', 'XGBoost']:
             explainer = shap.TreeExplainer(model)
@@ -31,7 +30,8 @@ def evaluate_models(models, X_test, output_dir: str):
             plt.close()
 
     results_df = pd.DataFrame(results)
-    results_df.to_csv(os.path.join(output_dir, "model_comparison.csv"), index=False)
+    results_df.to_csv(os.path.join(
+        output_dir, "model_comparison.csv"), index=False)
     logger.info("Model comparison saved to model_comparison.csv")
 
     return results_df
