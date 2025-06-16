@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def hypothesis_tests(df: pd.DataFrame, config_path: str):
     """Perform hypothesis tests for risk and margin differences."""
     with open(config_path, 'r') as file:
-        yaml.safe_load(file)  # config loaded but not used - kept for future use
+        yaml.safe_load(file)  # config loaded but not used - for future use
     logger.info("Starting hypothesis tests")
 
     results = []
